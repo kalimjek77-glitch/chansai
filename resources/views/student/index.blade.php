@@ -12,189 +12,144 @@
     <!-- Google Fonts: Inter for modern, professional typography -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     
-    <style>
-        /* Custom overrides for a refined, professional look */
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #f4f7fc;
-            color: #1e2a3e;
-            line-height: 1.5;
-        }
-        
-        /* Card style for main content */
-        .dashboard-card {
-            border: none;
-            border-radius: 1.25rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.05);
-            background-color: #ffffff;
-            transition: all 0.2s ease;
-        }
-        
-        /* Table styling: clean borders, subtle hover */
-        .table-custom {
-            margin-bottom: 0;
-            vertical-align: middle;
-            border-collapse: separate;
-            border-spacing: 0;
-        }
-        
-        .table-custom thead th {
-            background-color: #f8fafc;
-            color: #1e466e;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 1rem 0.75rem;
-            border-bottom: 1px solid #e2e8f0;
-            border-top: none;
-        }
-        
-        .table-custom tbody td {
-            padding: 0.9rem 0.75rem;
-            color: #2c3e50;
-            font-weight: 500;
-            border-bottom: 1px solid #edf2f7;
-            vertical-align: middle;
-        }
-        
-        .table-custom tbody tr:hover {
-            background-color: #fefce8;
-            transition: background 0.2s;
-        }
-        
-        /* Action buttons (Edit / Delete) inside table */
-        .btn-edit {
-            background-color: #eef2ff;
-            color: #1e40af;
-            border-radius: 40px;
-            padding: 0.3rem 0.9rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            border: 1px solid transparent;
-        }
-        
-        .btn-edit:hover {
-            background-color: #dbeafe;
-            color: #1e3a8a;
-            transform: translateY(-1px);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-        }
-        
-        .btn-delete {
-            background-color: #fff1f0;
-            color: #b91c1c;
-            border-radius: 40px;
-            padding: 0.3rem 0.9rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border: none;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .btn-delete:hover {
-            background-color: #fee2e2;
-            color: #991b1b;
-            transform: translateY(-1px);
-        }
-        
-        /* Add student button */
-        .btn-add-primary {
-            background-color: #0f3b5c;
-            border: none;
-            padding: 0.6rem 1.4rem;
-            font-weight: 600;
-            border-radius: 2rem;
-            font-size: 0.85rem;
-            transition: all 0.2s;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-        }
-        
-        .btn-add-primary:hover {
-            background-color: #0a2f4a;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        
-        /* Flash message (success) styling */
-        .alert-custom {
-            border-radius: 1rem;
-            border-left: 5px solid #2e7d32;
-            background-color: #e8f5e9;
-            color: #1e4620;
-            font-weight: 500;
-            padding: 0.85rem 1.2rem;
-            font-size: 0.9rem;
-        }
-        
-        /* Empty state styling */
-        .empty-state {
-            background-color: #f9fafb;
-            border-radius: 1.25rem;
-            padding: 2.5rem;
-            text-align: center;
-        }
-        
-        /* header area */
-        .page-header {
-            border-bottom: 1px solid #e4e9f0;
-            padding-bottom: 0.75rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        /* responsive table wrapper */
-        .table-responsive-stack {
-            overflow-x: auto;
-            border-radius: 1rem;
-        }
-        
-        /* badge style for Year/Section visual */
-        .badge-year {
-            background-color: #e9ecef;
-            color: #2c3e50;
-            font-weight: 500;
-            padding: 0.35rem 0.7rem;
-            border-radius: 30px;
-            font-size: 0.75rem;
-        }
-        
-        /* footer note */
-        .footer-note {
-            font-size: 0.75rem;
-            color: #6c757d;
-            border-top: 1px solid #e9ecef;
-            padding-top: 1rem;
-            margin-top: 2rem;
-        }
-        
-        @media (max-width: 576px) {
-            .btn-edit, .btn-delete {
-                padding: 0.25rem 0.7rem;
-                font-size: 0.7rem;
-            }
-            .table-custom thead th {
-                font-size: 0.7rem;
-                padding: 0.7rem 0.5rem;
-            }
-        }
+<style>
+/* ================= BASE ================= */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #f4f7fc;
+    color: #1e2a3e;
+    line-height: 1.5;
+}
 
-        /* Modern Header Container */
+/* ================= CARDS ================= */
+.dashboard-card {
+    border: none;
+    border-radius: 1.25rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.05);
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+/* ================= TABLE ================= */
+.table-custom {
+    margin-bottom: 0;
+    vertical-align: middle;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table-custom thead th {
+    background-color: #0b1f3a;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 1rem 0.75rem;
+    border: none;
+}
+
+.table-custom tbody td {
+    padding: 0.9rem 0.75rem;
+    color: #2c3e50;
+    font-weight: 500;
+    border-bottom: 1px solid #edf2f7;
+}
+
+.table-custom tbody tr:hover {
+    background-color: rgba(30, 78, 216, 0.06);
+}
+
+/* ================= BUTTONS ================= */
+.btn-edit {
+    background-color: rgba(30, 78, 216, 0.1);
+    color: #1e4ed8;
+    border-radius: 40px;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.btn-edit:hover {
+    background-color: #1e4ed8;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.btn-delete {
+    background-color: rgba(220, 38, 38, 0.1);
+    color: #b91c1c;
+    border-radius: 40px;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-delete:hover {
+    background-color: #dc2626;
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* ================= ADD BUTTON ================= */
+.btn-add-primary {
+    background-color: #0b1f3a;
+    color: #ffffff;
+    border: none;
+    padding: 0.6rem 1.4rem;
+    font-weight: 600;
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    box-shadow: 0 3px 10px rgba(30, 78, 216, 0.15);
+}
+
+.btn-add-primary:hover {
+    background-color: #1e4ed8;
+    transform: translateY(-1px);
+}
+
+/* ================= ALERT ================= */
+.alert-custom {
+    border-radius: 1rem;
+    border-left: 5px solid #1e4ed8;
+    background-color: rgba(30, 78, 216, 0.08);
+    color: #0b1f3a;
+    font-weight: 500;
+}
+
+/* ================= EMPTY STATE ================= */
+.empty-state {
+    background-color: #f9fafb;
+    border-radius: 1.25rem;
+    padding: 2.5rem;
+    text-align: center;
+}
+
+/* ================= HEADER (UPDATED PROFESSIONAL WHITE DESIGN) ================= */
 .modern-header {
     background: #ffffff;
     padding: 20px 25px;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+
+    /* NO BORDER */
+    border: none;
+
+    /* CLEAN PROFESSIONAL SHADOW */
+    box-shadow: 0 8px 20px rgba(30, 78, 216, 0.08),
+                0 2px 10px rgba(0, 0, 0, 0.05);
+
+    border-radius: 16px;
 }
 
-/* Flex layout */
+/* FLEX */
 .header-content {
     display: flex;
     justify-content: space-between;
@@ -206,27 +161,27 @@
 .header-left {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
-/* Icon */
+/* ICON BOX (SOFT BLUE) */
 .icon-box {
     width: 50px;
     height: 50px;
     border-radius: 14px;
-    background: #f3f4f6;
+    background: rgba(30, 78, 216, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 22px;
-    color: #374151;
+    color: #1e4ed8;
 }
 
-/* Title */
+/* TITLE */
 .title {
     font-size: 1.4rem;
     font-weight: 600;
-    color: #111827;
+    color: #0f172a;
 }
 
 /* RIGHT SIDE */
@@ -234,11 +189,10 @@
     margin-top: 10px;
 }
 
-/* Add Button */
+/* ADD BUTTON */
 .btn-add {
-    background: #ffffff;
-    color: #000000;
-    box-shadow: black 3px;
+    background: #1e4ed8;
+    color: #ffffff;
     padding: 10px 18px;
     border-radius: 12px;
     font-size: 0.85rem;
@@ -248,15 +202,58 @@
     align-items: center;
     gap: 6px;
     transition: 0.2s;
+    border: none;
 }
 
-/* Hover effect */
 .btn-add:hover {
-    background: #1f2937;
+    background: #0b1f3a;
     transform: translateY(-2px);
 }
 
-/* Responsive */
+/* ================= LOGO (NO BACKGROUND, NO BORDER) ================= */
+.logo-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.logo-circle:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+}
+
+/* ================= BADGE ================= */
+.badge-year {
+    background-color: rgba(30, 78, 216, 0.12);
+    color: #1e4ed8;
+    font-weight: 500;
+    padding: 0.35rem 0.7rem;
+    border-radius: 30px;
+    font-size: 0.75rem;
+}
+
+/* ================= FOOTER ================= */
+.footer-note {
+    font-size: 0.75rem;
+    color: #6c757d;
+    border-top: 1px solid #e9ecef;
+    padding-top: 1rem;
+    margin-top: 2rem;
+}
+
+/* ================= RESPONSIVE ================= */
 @media (max-width: 576px) {
     .header-content {
         flex-direction: column;
@@ -272,27 +269,13 @@
         width: 100%;
         justify-content: center;
     }
-}
-/* Circle Logo */
-.logo-circle {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    padding: 5px;
-    background: linear-gradient(135deg, #e5e7eb, #f9fafb);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
 
-.logo-circle img {
-    border-radius: 50%;
+    .table-custom thead th {
+        font-size: 0.7rem;
+        padding: 0.7rem 0.5rem;
+    }
 }
-
-/* Optional hover effect */
-.logo-circle:hover {
-    transform: scale(1.05);
-    transition: 0.2s;
-}
-    </style>
+</style>
 </head>
 <body>
 
@@ -301,10 +284,10 @@
         
 <div class="header-left">
     <div class="logo-circle">
-        <img src="logo.png" alt="Logo">
+        <img src="{{ asset('images/logo.png') }}" alt="Logo">
     </div>
     <div>
-        <h1 class="title mb-0">Students List</h1>
+        <h1 class="title mb-0">BSIT Students List</h1>
         <small class="text-muted">Manage all student records</small>
     </div>
 </div>
