@@ -185,28 +185,139 @@
                 padding: 0.7rem 0.5rem;
             }
         }
+
+        /* Modern Header Container */
+.modern-header {
+    background: #ffffff;
+    padding: 20px 25px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+
+/* Flex layout */
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* LEFT SIDE */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Icon */
+.icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #374151;
+}
+
+/* Title */
+.title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* RIGHT SIDE */
+.header-right {
+    margin-top: 10px;
+}
+
+/* Add Button */
+.btn-add {
+    background: #ffffff;
+    color: #000000;
+    box-shadow: black 3px;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.2s;
+}
+
+/* Hover effect */
+.btn-add:hover {
+    background: #1f2937;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .header-right {
+        width: 100%;
+    }
+
+    .btn-add {
+        width: 100%;
+        justify-content: center;
+    }
+}
+/* Circle Logo */
+.logo-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    padding: 5px;
+    background: linear-gradient(135deg, #e5e7eb, #f9fafb);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.logo-circle img {
+    border-radius: 50%;
+}
+
+/* Optional hover effect */
+.logo-circle:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+}
     </style>
 </head>
 <body>
 
-<div class="container py-4 py-md-5">
-    <!-- Professional header with icon and title -->
-    <div class="d-flex flex-wrap justify-content-between align-items-center page-header">
-        <div class="d-flex align-items-center gap-3">
-            <div class="bg-primary bg-opacity-10 p-2 rounded-3 d-inline-flex">
-                <i class="bi bi-people-fill text-primary fs-3"></i>
-            </div>
-            <div>
-                <h1 class="display-6 fw-semibold mb-0" style="font-size: 1.85rem;">Students List</h1>
-            </div>
-        </div>
-        <!-- Add Student button with icon -->
-        <div class="mt-3 mt-sm-0">
-            <a href="{{ route('students.create') }}" class="btn btn-add-primary text-white">
-                <i class="bi bi-plus-circle me-1"></i> Add New Student
+<div class="modern-header mb-4">
+    <div class="header-content">
+        
+<div class="header-left">
+    <div class="logo-circle">
+        <img src="logo.png" alt="Logo">
+    </div>
+    <div>
+        <h1 class="title mb-0">Students List</h1>
+        <small class="text-muted">Manage all student records</small>
+    </div>
+</div>
+
+        <!-- RIGHT: Button -->
+        <div class="header-right">
+            <a href="{{ route('students.create') }}" class="btn-add">
+                <i class="bi bi-plus-circle"></i> Add Student
             </a>
         </div>
+
     </div>
+</div>
 
     <!-- Success message with Bootstrap styling (if session success exists) -->
     @if (session('success'))
