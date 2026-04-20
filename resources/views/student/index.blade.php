@@ -191,7 +191,7 @@ body {
 
 /* ADD BUTTON */
 .btn-add {
-    background: #1e4ed8;
+    background: #0b1f3a;
     color: #ffffff;
     padding: 10px 18px;
     border-radius: 12px;
@@ -236,8 +236,7 @@ body {
 
 /* ================= BADGE ================= */
 .badge-year {
-    background-color: rgba(30, 78, 216, 0.12);
-    color: #1e4ed8;
+    color: #000000;
     font-weight: 500;
     padding: 0.35rem 0.7rem;
     border-radius: 30px;
