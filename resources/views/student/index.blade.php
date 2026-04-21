@@ -61,8 +61,8 @@ body {
 
 /* ================= BUTTONS ================= */
 .btn-edit {
-    background-color: rgba(30, 78, 216, 0.1);
-    color: #1e4ed8;
+    background-color: #1c3a96;
+    color: #ffffff;
     border-radius: 40px;
     padding: 0.3rem 0.9rem;
     font-size: 0.75rem;
@@ -82,8 +82,8 @@ body {
 }
 
 .btn-delete {
-    background-color: rgba(220, 38, 38, 0.1);
-    color: #b91c1c;
+    background-color: #b42020;
+    color: #ffffff;
     border-radius: 40px;
     padding: 0.3rem 0.9rem;
     font-size: 0.75rem;
@@ -136,15 +136,10 @@ body {
 /* ================= HEADER (UPDATED PROFESSIONAL WHITE DESIGN) ================= */
 .modern-header {
     background: #ffffff;
-    padding: 20px 25px;
-
-    /* NO BORDER */
+    padding: 10px 20px;   /* ↓ reduced from 20px 25px */
     border: none;
-
-    /* CLEAN PROFESSIONAL SHADOW */
-    box-shadow: 0 8px 20px rgba(30, 78, 216, 0.08),
-                0 2px 10px rgba(0, 0, 0, 0.05);
-
+    box-shadow: 0 4px 12px rgba(30, 78, 216, 0.08),
+                0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 /* FLEX */
@@ -189,9 +184,9 @@ body {
 
 /* ADD BUTTON */
 .btn-add {
-    background: #ffffff;
+    background: #0b1f3a;
     border:1px solid #000000;
-    color: #000000;
+    color: #ffffff;
     padding: 10px 18px;
     border-radius: 12px;
     font-size: 0.85rem;
@@ -205,6 +200,7 @@ body {
 
 .btn-add:hover {
     background: #0b1f3a;
+    color: white;
     transform: translateY(-2px);
 }
 
@@ -382,9 +378,11 @@ body {
                             <td class="text-center">
                                 <div class="d-flex gap-2 justify-content-start justify-content-md-center flex-wrap">
                                     <!-- Edit Link (styled as button) -->
-                                    <a href="{{ route('students.edit', $students->id) }}" class="btn-edit text-decoration-none">
+                                    <button class="btn-edit border-0"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#editStudentModal{{ $students->id }}">
                                         <i class="bi bi-pencil-square"></i> Edit
-                                    </a>
+                                    </button>
                                     
                                     <!-- Delete Form with inline style and confirmation (optional nice-to-have) -->
                                     <form method="post" action="{{ route('students.destroy', $students->id) }}" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this student record? This action cannot be undone.');">
@@ -397,6 +395,107 @@ body {
                                 </div>
                             </td>
                         </tr>
+
+                        <!-- ================= EDIT STUDENT MODAL ================= -->
+<div class="modal fade" id="editStudentModal{{ $students->id }}" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content" style="border-radius: 1.25rem; overflow:hidden;">
+
+      <!-- HEADER -->
+      <div class="modal-header justify-content-center"
+           style="background: linear-gradient(135deg, #0b1f3a, #1e4ed8);
+                  color:white;
+                  padding: 0.8rem 1rem;">
+
+        <div class="d-flex align-items-center gap-2">
+            <img src="{{ asset('images/logo.png') }}"
+                 style="width:55px; height:55px; border-radius:50%; object-fit:cover;">
+
+            <h6 class="modal-title mb-0 fw-semibold">
+                Edit Student
+            </h6>
+        </div>
+
+      </div>
+
+      <!-- BODY -->
+      <div class="modal-body p-4" style="background:#f8fafc;">
+
+        <form method="POST" action="{{ route('students.update', $students->id) }}">
+            @csrf
+            @method('PUT')
+
+            <div class="row g-3">
+
+                <!-- First Name -->
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">First Name</label>
+                    <input type="text"
+                           name="first_name"
+                           class="form-control"
+                           value="{{ $students->first_name }}"
+                           required>
+                </div>
+
+                <!-- Last Name -->
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Last Name</label>
+                    <input type="text"
+                           name="last_name"
+                           class="form-control"
+                           value="{{ $students->last_name }}"
+                           required>
+                </div>
+
+                <!-- Year -->
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Year</label>
+                    <select name="year" class="form-select" required>
+                        <option value="">Select Year</option>
+                        <option value="1" {{ $students->year == 1 ? 'selected' : '' }}>1st Year</option>
+                        <option value="2" {{ $students->year == 2 ? 'selected' : '' }}>2nd Year</option>
+                        <option value="3" {{ $students->year == 3 ? 'selected' : '' }}>3rd Year</option>
+                        <option value="4" {{ $students->year == 4 ? 'selected' : '' }}>4th Year</option>
+                    </select>
+                </div>
+
+                <!-- Section -->
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Section</label>
+                    <input type="text"
+                           name="section"
+                           class="form-control"
+                           value="{{ $students->section }}"
+                           required>
+                </div>
+
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="d-flex justify-content-end gap-2 mt-4">
+
+                <button type="button"
+                        class="btn btn-light border"
+                        data-bs-dismiss="modal">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                        class="btn text-white"
+                        style="background:#0b1f3a; padding:0.6rem 1.4rem; border-radius:10px;">
+                    <i class="bi bi-check-circle"></i> Update
+                </button>
+
+            </div>
+
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
                         @endforeach
                     </tbody>
                 </table>
