@@ -16,15 +16,14 @@
 /* ================= BASE ================= */
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: #f4f7fc;
+    background-color: #c3c5c8;
     color: #1e2a3e;
     line-height: 1.5;
 }
 
 /* ================= CARDS ================= */
 .dashboard-card {
-    border: none;
-    border-radius: 1.25rem;
+    border: 1px solid #000000 ;
     box-shadow: 0 8px 20px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.05);
     background-color: #ffffff;
     transition: all 0.2s ease;
@@ -101,9 +100,9 @@ body {
 
 /* ================= ADD BUTTON ================= */
 .btn-add-primary {
-    background-color: #0b1f3a;
-    color: #ffffff;
-    border: none;
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
     padding: 0.6rem 1.4rem;
     font-weight: 600;
     border-radius: 2rem;
@@ -146,7 +145,6 @@ body {
     box-shadow: 0 8px 20px rgba(30, 78, 216, 0.08),
                 0 2px 10px rgba(0, 0, 0, 0.05);
 
-    border-radius: 16px;
 }
 
 /* FLEX */
@@ -191,8 +189,9 @@ body {
 
 /* ADD BUTTON */
 .btn-add {
-    background: #0b1f3a;
-    color: #ffffff;
+    background: #ffffff;
+    border:1px solid #000000;
+    color: #000000;
     padding: 10px 18px;
     border-radius: 12px;
     font-size: 0.85rem;
@@ -202,7 +201,6 @@ body {
     align-items: center;
     gap: 6px;
     transition: 0.2s;
-    border: none;
 }
 
 .btn-add:hover {
