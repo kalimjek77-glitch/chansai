@@ -284,14 +284,13 @@ body {
         <img src="{{ asset('images/logo.png') }}" alt="Logo">
     </div>
     <div>
-        <h1 class="title mb-0">BSIT Students List</h1>
-        <small class="text-muted">Manage all student records</small>
+        <h1 class="title mb-0">𝐁𝐒𝐈𝐓 𝐒𝐭𝐮𝐝𝐞𝐧𝐭𝐬 𝐋𝐢𝐬𝐭</h1>
     </div>
 </div>
 
         <!-- RIGHT: Button -->
         <div class="header-right">
-            <a href="{{ route('students.create') }}" class="btn-add">
+            <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#addStudentModal">
                 <i class="bi bi-plus-circle"></i> Add Student
             </a>
         </div>
@@ -306,14 +305,53 @@ body {
             <div>{{ session('success') }}</div>
             <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    @endif
+    @endif   
+
+    <!-- 🔍 SEARCH BAR -->
+<div class="dashboard-card p-3 p-lg-4 mb-3">
+
+    <div class="row g-2">
+
+        <!-- Search name -->
+        <div class="col-md-4">
+            <input type="text" id="searchInput" class="form-control"
+                placeholder="Search first or last name...">
+        </div>
+
+        <!-- Year filter -->
+        <div class="col-md-3">
+            <select id="yearFilter" class="form-select">
+                <option value="">All Year</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+
+        <!-- Section filter -->
+        <div class="col-md-3">
+            <input type="text" id="sectionFilter" class="form-control"
+                placeholder="Section...">
+        </div>
+
+        <!-- Button -->
+        <div class="col-md-2 d-grid">
+            <button class="btn btn-dark" onclick="filterTable()">
+                <i class="bi bi-search"></i> Search
+            </button>
+        </div>
+
+    </div>
+
+</div>
 
     <!-- Main card component for student list table -->
     <div class="dashboard-card p-3 p-lg-4">
         <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
             <div class="mt-2 mt-sm-0">
                 <span class="badge bg-light text-dark border px-3 py-2 rounded-pill">
-                    <i class="bi bi-person-badge me-1"></i> Total: {{ count($student) }}
+                    <i class="bi bi-person-badge me-1"></i> Total: <span id="totalCount">{{ count($student) }}</span>
                 </span>
             </div>
         </div>
@@ -388,6 +426,127 @@ body {
             }, 1000);
         }
     })();
+
+    
+function filterTable() {
+
+    let search = document.getElementById("searchInput").value.toLowerCase();
+    let year = document.getElementById("yearFilter").value;
+    let section = document.getElementById("sectionFilter").value.toLowerCase();
+
+    let rows = document.querySelectorAll("tbody tr");
+    let count = 0;
+
+    rows.forEach(row => {
+
+        let first = row.children[0].innerText.toLowerCase();
+        let last = row.children[1].innerText.toLowerCase();
+        let rowYear = row.children[2].innerText.trim();
+        let rowSection = row.children[3].innerText.toLowerCase();
+
+        let matchName = first.includes(search) || last.includes(search);
+        let matchYear = year === "" || rowYear === year;
+        let matchSection = rowSection.includes(section);
+
+        if (matchName && matchYear && matchSection) {
+            row.style.display = "";
+            count++;
+        } else {
+            row.style.display = "none";
+        }
+    });
+
+    document.getElementById("totalCount").innerText = count;
+}
 </script>
+<!-- ================= ADD STUDENT MODAL ================= -->
+<div class="modal fade" id="addStudentModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius: 1.25rem; overflow:hidden;">
+
+<!-- HEADER -->
+<div class="modal-header justify-content-center position-relative"
+     style="background: linear-gradient(135deg, #0b1f3a, #1e4ed8);
+            color:white;
+            padding: 0.8rem 1rem;">
+
+    <!-- CENTER CONTENT -->
+    <div class="d-flex align-items-center gap-2">
+
+        <!-- LOGO (smaller + tighter) -->
+        <img src="{{ asset('images/logo.png') }}"
+             alt="Logo"
+             style="width:60px; height:60px; object-fit:cover; border-radius:50%;">
+
+        <!-- TITLE (closer to logo) -->
+        <h6 class="modal-title mb-0 fw-semibold" style="letter-spacing:0.3px;">
+            Add Student
+        </h6>
+
+    </div>
+
+</div>
+
+      <!-- BODY -->
+      <div class="modal-body p-4" style="background:#f8fafc;">
+
+        <form method="post" action="{{ route('students.store') }}">
+            @csrf
+            @method('post')
+
+            <!-- First Name -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">First Name</label>
+                <input type="text" name="first_name" class="form-control" required>
+            </div>
+
+            <!-- Last Name -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Last Name</label>
+                <input type="text" name="last_name" class="form-control" required>
+            </div>
+
+            <!-- Year -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Year</label>
+                <select name="year" class="form-select" required>
+                    <option value="">Select Year</option>
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                </select>
+            </div>
+
+            <!-- Section -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Section</label>
+                <input type="text" name="section" class="form-control" required>
+            </div>
+
+            <!-- BUTTONS -->
+            <div class="d-flex justify-content-end gap-2 mt-4">
+
+                <button type="button"
+                        class="btn btn-light border"
+                        data-bs-dismiss="modal">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                        class="btn text-white"
+                        style="background:#0b1f3a; padding:0.6rem 1.4rem; border-radius:10px;">
+                    Save Student
+                </button>
+
+            </div>
+
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>
 </body>
 </html>
