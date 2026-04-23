@@ -268,9 +268,154 @@ body {
         padding: 0.7rem 0.5rem;
     }
 }
+/* ================= WELCOME SCREEN ================= */
+.welcome-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0b1f3a, #1e4ed8);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+.welcome-content {
+    max-width: 500px;
+}
+
+.welcome-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+/* ================= ABOUT MODAL ================= */
+.about-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.about-box {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    width: 420px;
+    max-width: 90%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+/* PROFILE IMAGE */
+.dev-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #1e4ed8;
+    margin-bottom: 10px;
+}
+
+/* NAME */
+.dev-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #0b1f3a;
+}
+
+/* ROLE */
+.dev-role {
+    font-size: 0.85rem;
+    color: #1e4ed8;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* DESCRIPTION */
+.dev-desc {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* SYSTEM SECTION */
+.system-box {
+    background: #f8fafc;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    color: #2c3e50;
+}
 </style>
 </head>
 <body>
+
+<!-- ================= WELCOME SCREEN ================= -->
+<div id="welcomeScreen" class="welcome-screen">
+
+    <div class="welcome-content text-center">
+        <img src="{{ asset('images/logo.png') }}" class="welcome-logo mb-3">
+
+        <h1 class="fw-bold">Welcome to BSIT Student System</h1>
+        <p class="text-muted">Manage students easily and efficiently</p>
+
+        <div class="mt-4 d-flex justify-content-center gap-3">
+            <button class="btn btn-dark px-4" onclick="enterDashboard()">
+                Enter Dashboard
+            </button>
+
+            <button class="btn btn-outline-dark px-4" onclick="showAbout()">
+                About Us
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<!-- ================= ABOUT US MODAL ================= -->
+<div id="aboutModal" class="about-modal">
+    <div class="about-box">
+
+        <h4 class="fw-bold mb-3">About the Developer</h4>
+
+        <!-- PROFILE -->
+        <img src="{{ asset('images/profile.jpg') }}" class="dev-img">
+
+        <div class="dev-name">Your Name Here</div>
+        <div class="dev-role">Full Stack Developer</div>
+
+        <div class="dev-desc">
+            A passionate BSIT student specializing in building modern web systems using PHP, Laravel, and MySQL. 
+            Focused on creating clean, efficient, and user-friendly applications.
+        </div>
+
+        <!-- SYSTEM INFO -->
+        <div class="system-box mt-3">
+            <strong>About the System</strong><br>
+            This Student Management System is designed to manage student records efficiently. 
+            It allows administrators to add, edit, search, and organize student data such as 
+            names, year levels, and sections in a clean and structured dashboard.
+        </div>
+
+        <!-- BUTTON -->
+        <button class="btn btn-dark mt-4 w-100" onclick="closeAbout()">
+            Close
+        </button>
+
+    </div>
+</div>
 
 <div class="modern-header mb-4">
     <div class="header-content">
@@ -284,8 +429,12 @@ body {
     </div>
 </div>
 
-        <!-- RIGHT: Button -->
+        
         <div class="header-right">
+
+            <button onclick="goBackWelcome()" class="btn btn-outline-dark">
+             <i class="bi bi-arrow-left"></i> Back
+            </button>
             <a href="#" class="btn-add" data-bs-toggle="modal" data-bs-target="#addStudentModal">
                 <i class="bi bi-plus-circle"></i> Add Student
             </a>
@@ -647,5 +796,31 @@ function filterTable() {
     </div>
   </div>
 </div>
+
+<script>
+function enterDashboard() {
+    document.getElementById("welcomeScreen").style.display = "none";
+}
+
+function showAbout() {
+    document.getElementById("aboutModal").style.display = "flex";
+}
+
+function closeAbout() {
+    document.getElementById("aboutModal").style.display = "none";
+}
+
+// CLICK ANYWHERE TO ENTER
+document.getElementById("welcomeScreen").addEventListener("click", function(e) {
+    if (e.target.id === "welcomeScreen") {
+        enterDashboard();
+    }
+});
+</script>
+<script>
+function goBackWelcome() {
+    document.getElementById("welcomeScreen").style.display = "flex";
+}
+</script>
 </body>
 </html>
