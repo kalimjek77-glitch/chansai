@@ -358,6 +358,16 @@ body {
     font-size: 0.85rem;
     color: #2c3e50;
 }
+.text-muted {
+    --bs-text-opacity: 1;
+    color: white !important;
+}
+.px-4 {
+    padding-right: 1.5rem !important;
+    padding-left: 1.5rem !important;
+    color: white;
+    background: black;
+}
 </style>
 </head>
 <body>
@@ -393,7 +403,7 @@ body {
         <!-- PROFILE -->
         <img src="{{ asset('images/profile.jpg') }}" class="dev-img">
 
-        <div class="dev-name">Your Name Here</div>
+        <div class="dev-name">MR. TORRE CHAN</div>
         <div class="dev-role">Full Stack Developer</div>
 
         <div class="dev-desc">
