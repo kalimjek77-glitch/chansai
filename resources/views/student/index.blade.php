@@ -403,7 +403,7 @@ body {
         <!-- PROFILE -->
         <img src="{{ asset('images/profile.jpg') }}" class="dev-img">
 
-        <div class="dev-name">MR. TORRE CHAN</div>
+        <div class="dev-name">CHRISTIAN MAGALLANES</div>
         <div class="dev-role">Full Stack Developer</div>
 
         <div class="dev-desc">
